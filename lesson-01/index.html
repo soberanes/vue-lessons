@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vue Lesson 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <style>
+            #app{
+                margin-top: 10%;
+            }
+        </style>
+</head>
+<body>
+    
+    <div id="app" class="container">
+        <div v-if="!formSubmitted">
+            <form v-on:submit.prevent="submitForm">
+                <h4>Regístrate</h4>
+                <div ckass="form-group">
+                    <label for="first_name">Nombre:</label>
+                    <input v-model="first_name" type="text" id="first_name" class="form-control" />
+                </div>
+                <div ckass="form-group">
+                    <label for="last_name">Apellido:</label>
+                    <input v-model="last_name" type="text" id="last_name" class="form-control" />
+                </div>
+
+                <button v-bind:disabled="!isFormValid()" type="submit" class="btn btn-primary">Continuar</button>
+            </form>
+        </div>
+        <div v-else>
+            <h4>Bienvenido, {{ first_name }} {{ last_name }}</h4>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script type="text/javascript">
+
+    new Vue({
+        el: '#app',
+        data: {
+            first_name: '',
+            last_name: '',
+            formSubmitted: false
+        },
+        methods: {
+            isFormValid: function () {
+                return this.first_name != "" && this.last_name != "";
+            },
+            submitForm: function () {
+                if (!this.isFormValid()) return;
+
+                this.formSubmitted = true;
+            }
+        }
+    })
+
+    </script>
+</body>
+</html>
